@@ -4,8 +4,17 @@
 </a>
   <hr>
 <a href="https://ig.me/m/cytra_k9">
-<img width="340px" height= "200px"src="https://img.shields.io/badge/WHATSAPP-purple?style=for-the-badge&logo=instagram">
-  
+<img width="340px" height= "200px"src="https://img.shields.io/badge/INSTAGRAM-purple?style=for-the-badge&logo=instagram">
+</a>
+<hr>
+<a href="https://www.tiktok.com/@cytra_k9"
+<img width="340px" height= "200px"src="https://img.shields.io/badge/TIKTOK-black?style=for-the-badge&logo=tiktok"> 
+</a>
+<hr>
+<a href="jackwaikwa1@gmail.com">
+  <img width="340px" height= "200px" src="https://files.catbox.moe/snj3h4.jpg"
+    <button> email me </button>
+</a>
 </a>
         
 

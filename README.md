@@ -4,7 +4,7 @@
 </a>
   <hr>
 <a href="https://ig.me/m/cytra_k9">
-<img width="340px" height= "200px"src="https://img.shields.io/badge/WHATSAPP-red?style=for-the-badge&logo=instagram">
+<img width="340px" height= "200px"src="https://img.shields.io/badge/WHATSAPP-purple?style=for-the-badge&logo=instagram">
   
 </a>
         

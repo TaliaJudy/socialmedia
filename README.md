@@ -15,7 +15,10 @@
   <img align="center" width="340px" height= "200px" src="https://files.catbox.moe/snj3h4.jpg"
     <button> email me </button>
 </a>
-
+<a href="https://www.twitch.tv/cytra_k9"
+<img align="center" width="340px" height= "200px" src="https://img.shields.io/badge/TWITCH-purple?style=for-the-badge&logo=twitch">
+  
+</a>
         
 
   

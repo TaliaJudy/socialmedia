@@ -1,7 +1,7 @@
 <html>
   <style>
     body {
-      background-image: url('https://files.catbox.moe/snj3h4.jpg');
+      background-color: blue;
     }
   </style>
 <a href="https://wa.link/ud1era">

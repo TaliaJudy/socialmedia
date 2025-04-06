@@ -1,9 +1,4 @@
 <html>
-  <style>
-    body {
-      background-color: blue;
-    }
-  </style>
 <a href="https://wa.link/ud1era">
 <img width="340px" height= "200px"src="https://img.shields.io/badge/WHATSAPP-red?style=for-the-badge&logo=whatsapp">  
 </a>
@@ -20,7 +15,7 @@
   <img width="340px" height= "200px" src="https://files.catbox.moe/snj3h4.jpg"
     <button> email me </button>
 </a>
-</a>
+
         
 
   

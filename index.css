@@ -1,0 +1,51 @@
+body {
+  background: url('https://files.catbox.moe/gra2g1.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  margin: 2rem 0;
+  text-shadow: 0 0 8px #000;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.link-card {
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.6);
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.link-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.05);
+}
+
+/* Color theming per service */
+.whatsapp { border: 2px solid #25D366; }
+.instagram { border: 2px solid #C13584; }
+.tiktok { border: 2px solid #000; }
+.email { border: 2px solid #FFA500; }
+.twitch { border: 2px solid #9146FF; }
+.locket { border: 2px solid #FF4500; }

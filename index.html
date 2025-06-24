@@ -19,11 +19,7 @@
   h2 { text-align:center; color:#0ff; text-shadow:0 0 16px #0ff; margin-top:0; }
   .avatar-ring { width:180px; height:180px; border-radius:50%; padding:6px; border:2px solid #0ff; box-shadow:0 0 32px #0ff; animation:pulse 2s infinite alternate; }
   @keyframes pulse { to {box-shadow:0 0 64px #ff0ff0;} }
-  .avatar-ring img {
-    width:100%; height:100%; border-radius:50%; object-fit:cover;
-    animation:rotateY 6s linear infinite;
-    opacity:1; transition:opacity 0.8s ease;
-  }
+  .avatar-ring img { width:100%; height:100%; border-radius:50%; object-fit:cover; animation:rotateY 6s linear infinite; opacity:1; transition:opacity 0.8s ease; }
   .avatar-ring img.fade-out { opacity:0; }
   @keyframes rotateY { to{transform:rotateY(1turn);} }
   .links { display:flex; flex-direction:column; align-items:center; gap:1rem; }
@@ -31,7 +27,7 @@
   .link:hover { background:#0ff; color:#000; box-shadow:0 0 32px #0ff; transform:scale(1.1); }
   #clock { font-size:1.2rem; color:#0ff; text-shadow:0 0 16px #0ff; }
   canvas#bg { position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.2; z-index:0; }
-  .trail { position:fixed; width:12px; height:12px; background:radial-gradient(#0ff,#ff0ff0); border-radius:50%; pointer-events:none; opacity:0.8; transform:translate(-50%, -50%); animation:trailFade 1s forwards; box-shadow:0 0 24px #0ff; }
+  .trail { position:fixed; width:12px; height:12px; background:radial-gradient(#0ff,#ff0ff0); border-radius:50%; pointer-events:none; opacity:0.8; transform:translate(-50%,-50%); animation:trailFade 1s forwards; box-shadow:0 0 24px #0ff; }
   @keyframes trailFade { to { opacity:0; transform:translate(-50%,-50%) scale(2); } }
 </style>
 </head>
@@ -66,13 +62,13 @@
 </main>
 
 <script>
-  // Avatars
+  // Avatars list
   const avatars = [
-    "https://i.pinimg.com/originals/80/2e/ea/802eead8bdcd70fa1ffbaec01e3797fa.jpg",
-    "https://i.pinimg.com/564x/5b/b6/65/5bb6659c57ec5472a7e0515aa93aee54.jpg",
-    "https://i.pinimg.com/564x/13/77/73/137773c2e394a74e9278b065df7f41ec.jpg",
-    "https://i.pinimg.com/564x/ea/89/46/ea8946aa98d3c73be5754648d911fa1e.jpg",
-    "https://i.pinimg.com/originals/6c/2c/5b/6c2c5b550cf7ebd1da1b55b7fa047065.png"
+    "https://files.catbox.moe/457ojz.png",
+    "https://files.catbox.moe/7dcvxf.jpg",
+    "https://files.catbox.moe/aj3z0s.jpg",
+    "https://files.catbox.moe/xima9h.png",
+    "https://files.catbox.moe/i3gvtk.jpg"
   ];
   const avatarImg = document.getElementById('avatar');
   let currentIndex = Math.floor(Math.random() * avatars.length);
@@ -86,10 +82,10 @@
       currentIndex = nextIndex;
       avatarImg.src = avatars[currentIndex];
       avatarImg.classList.remove('fade-out');
-    }, 800);
-  }, 6000); // Every 6s
+    }, 800); // wait for fade-out before switch
+  }, 6000); // every 6s
 
-  // Reveal cards
+  // Reveal cards on scroll
   const cards=document.querySelectorAll('.card'); window.addEventListener('scroll',()=>{cards.forEach(card=>{let rect=card.getBoundingClientRect();if(rect.top<window.innerHeight-50)card.classList.add('visible');});}); window.dispatchEvent(new Event('scroll'));
   // Clock
   setInterval(() => {document.getElementById('clock').textContent=new Date().toLocaleString();},1000);
@@ -98,7 +94,7 @@
   let stars=Array.from({length:200},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,speed:0.2+Math.random()*0.3}));
   function drawStars(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI); ctx.fillStyle='#0ff'; ctx.fill(); s.y+=s.speed; if(s.y>canvas.height)s.y=0; }); requestAnimationFrame(drawStars); } drawStars();
   window.addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
-  // Trail
+  // Mouse trail
   document.addEventListener('mousemove', e => { const trail=document.createElement('div'); trail.className='trail'; trail.style.left=e.clientX+'px'; trail.style.top=e.clientY+'px'; document.body.appendChild(trail); setTimeout(() => trail.remove(),800); });
 </script>
 

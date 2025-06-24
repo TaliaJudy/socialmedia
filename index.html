@@ -7,140 +7,177 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 <style>
   body {
-    min-height: 100vh;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #2b2e8b, #562d7e, #2c8c73);
     color: white;
-    text-align: center;
     overflow-x: hidden;
-    animation: hueShift 12s linear infinite;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #0c0c1a, #1e1e3f, #0c0c1a);
   }
-  @keyframes hueShift {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+  #particles-js {
+    position: fixed;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    z-index: 0;
+  }
+  .content {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1rem;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.3s;
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .glitch {
+    font-size: 2.4rem;
+    position: relative;
+    color: #0ff;
+    letter-spacing: 2px;
+    animation: glitch 1s infinite;
+  }
+  @keyframes glitch {
+    0%,100% { clip: rect(0,900px,0,0); }
+    50% { clip: rect(0,900px,100%,0); }
   }
 
   .profile-card {
-    background: rgba(0,0,0,0.4);
-    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
     padding: 2rem 1rem;
     width: 90%;
     max-width: 400px;
-    margin: 2rem auto 1rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    margin: 2rem auto;
+    box-shadow: 0 0 30px rgba(0,255,234,0.2);
+    transition: box-shadow 0.3s;
+  }
+  .profile-card:hover {
+    box-shadow: 0 0 40px rgba(0,255,234,0.5);
   }
   .profile-card img {
     border-radius: 50%;
-    border: 3px solid #6efcc3;
-    width: 120px;
-    height: 120px;
+    border: 4px solid #0ff;
+    width: 120px; height: 120px;
     object-fit: cover;
-    margin-bottom: 1rem;
-    transition: transform 0.3s;
+    box-shadow: 0 0 20px #0ff;
+    transition: transform 0.4s;
   }
   .profile-card img:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1) rotate(10deg);
   }
   .profile-card h2 {
-    background: linear-gradient(90deg, #ff8a00, #e52e71, #8a2ee5, #00c2ff);
-    background-size: 400% 400%;
+    background: linear-gradient(90deg,#ff8a00,#e52e71,#8a2ee5,#00c2ff);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradientShift 5s ease infinite;
-    margin: 0.2rem 0;
-    font-size: 1.6rem;
+    animation: gradientShift 3s infinite;
+    margin: 0.3rem 0;
+    font-size: 1.8rem;
   }
   @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
+    0%,100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
   }
-  .profile-card p {
-    color: #ccc;
-    font-size: 0.9rem;
-    margin: 0.3rem 0 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    text-shadow: 0 0 8px rgba(0,0,0,0.7);
-    margin: 1rem 0;
-  }
+  .profile-card p { color: #ccc; font-size: 1rem; }
 
   .links {
-    padding-top: 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    padding-top: 1rem;
   }
   .link {
-    width: 90%;
-    max-width: 320px;
-    padding: 0.8rem;
-    border: 2px solid #6efcc3;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.3);
-    color: white;
-    font-size: 1.1rem;
+    width: 90%; max-width: 320px;
+    padding: 0.9rem;
+    border-radius: 1rem;
     text-decoration: none;
-    box-shadow: 0 0 12px rgba(46,139,212,0.4);
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    color: white;
+    font-size: 1.2rem;
+    background: rgba(0, 255, 234, 0.1);
+    border: 1px solid #0ff;
+    box-shadow: 0 0 8px rgba(0,255,234,0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .link i {
+    margin-right: 0.5rem;
+  }
+  .link::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(0,255,234,0.4), transparent);
+    transition: 0.5s;
+  }
+  .link:hover::before {
+    left: 100%;
   }
   .link:hover {
-    background: rgba(0,0,0,0.5);
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(102,255,208,0.8);
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(0,255,234,0.8);
   }
 
   footer {
-    margin-top: 2rem;
-    opacity: 0.9;
-    padding-bottom: 1rem;
+    opacity: 0.8;
+    padding: 2rem 0 1rem;
+    color: #ccc;
   }
   #clock {
-    font-size: 1.1rem;
-    margin-top: 0.5rem;
-    color: #9dffe6;
-    text-shadow: 0 0 8px rgba(157,255,230,0.7);
-  }
-
-  @media (max-width: 500px) {
-    .profile-card { padding: 1rem; }
-    .link { font-size: 1rem; }
-    h1 { font-size: 1.8rem; }
+    font-size: 1rem;
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff;
   }
 </style>
 </head>
 <body>
 
-<audio id="welcomeAudio" src="PTT-20250624-WA0000.m4a" preload="auto"></audio>
+<div id="particles-js"></div>
+<div class="content">
+  <audio id="welcomeAudio" src="PTT-20250624-WA0000.m4a" preload="auto"></audio>
+  
+  <div class="profile-card">
+    <img src="https://via.placeholder.com/120" alt="Your Avatar" />
+    <h2>Cytra_K9</h2>
+    <p>Gamer | Creator | Tech Enthusiast 🌟</p>
+  </div>
 
-<div class="profile-card">
-  <img src="https://via.placeholder.com/120" alt="Your Avatar" />
-  <h2>Cytra_K9</h2>
-  <p>Welcome to my page! 🌟 Gamer | Creator | Tech Enthusiast</p>
+  <h1 class="glitch">My Socials</h1>
+  <div class="links">
+    <a href="https://wa.link/ud1era" class="link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="https://ig.me/m/cytra_k9" class="link"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="https://www.tiktok.com/@cytra_k9" class="link"><i class="fab fa-tiktok"></i> TikTok</a>
+    <a href="https://t.me/Cytra_k" class="link"><i class="fab fa-telegram"></i> Telegram</a>
+    <a href="mailto:jackwaikwa1@gmail.com" class="link"><i class="fas fa-envelope"></i> Email</a>
+    <a href="https://www.twitch.tv/cytra_k9" class="link"><i class="fab fa-twitch"></i> Twitch</a>
+    <a href="https://locket.cam/cytra_k9" class="link"><i class="fas fa-lock"></i> Locket</a>
+  </div>
+
+  <footer>
+    <p>&copy; Cytra 2025</p>
+    <div id="clock"></div>
+  </footer>
 </div>
 
-<h1>My Socials</h1>
-<div class="links">
-  <a href="https://wa.link/ud1era" class="link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-  <a href="https://ig.me/m/cytra_k9" class="link"><i class="fab fa-instagram"></i> Instagram</a>
-  <a href="https://www.tiktok.com/@cytra_k9" class="link"><i class="fab fa-tiktok"></i> TikTok</a>
-  <a href="https://t.me/Cytra_k" class="link"><i class="fab fa-telegram"></i> Telegram</a>
-  <a href="mailto:jackwaikwa1@gmail.com" class="link"><i class="fas fa-envelope"></i> Email</a>
-  <a href="https://www.twitch.tv/cytra_k9" class="link"><i class="fab fa-twitch"></i> Twitch</a>
-  <a href="https://locket.cam/cytra_k9" class="link"><i class="fas fa-lock"></i> Locket</a>
-</div>
-
-<footer>
-  <p>@cytra 2025</p>
-  <div id="clock"></div>
-</footer>
-
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
+  particlesJS('particles-js', {
+    particles: {
+      number: { value: 70 },
+      color: { value: "#0ff" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3 },
+      move: { enable: true, speed: 1 }
+    }
+  });
+
   setInterval(() => {
     let now = new Date();
     document.getElementById('clock').innerText =
@@ -156,6 +193,5 @@
     }, 500);
   });
 </script>
-
 </body>
 </html>

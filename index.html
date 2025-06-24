@@ -4,109 +4,79 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>My Socials</title>
-<link rel="icon" href="https://files.catbox.moe/b4uivz.webp" type="image/x-icon" />
-
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
 <style>
   body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    color: #fff;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff66b2, #33ffcc);
-    background-size: 400% 400%;
-    animation: colorCycle 8s ease infinite;
+    background: linear-gradient(135deg, #2b2e8b, #562d7e, #2c8c73);
+    color: white;
+    text-align: center;
     overflow-x: hidden;
+    animation: hueShift 12s linear infinite;
+    filter: hue-rotate(0deg);
   }
 
-  @keyframes colorCycle {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes hueShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
   }
 
   h1 {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    margin-top: 40px;
     font-size: 2.5rem;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
-
-  #clock {
-    margin-top: 100px;
-    font-size: 1.2rem;
-    opacity: 0.9;
-    text-align: center;
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
   }
 
   .links {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding: 2rem 1rem;
   }
 
   .link {
-    position: relative;
     width: 90%;
     max-width: 320px;
     padding: 0.8rem;
-    border-radius: 12px;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    text-decoration: none;
+    border: 2px solid #6efcc3;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    color: white;
     font-size: 1.1rem;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-
-  .link::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    width: calc(100% + 6px);
-    height: calc(100% + 6px);
-    border-radius: 12px;
-    background: conic-gradient(
-      from 0deg,
-      red, orange, yellow, lime, cyan, blue, violet, red
-    );
-    animation: rotate 3s linear infinite;
-    z-index: -1;
-  }
-
-  @keyframes rotate {
-    to { transform: rotate(1turn); }
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(46, 139, 212, 0.4);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   }
 
   .link:hover {
-    transform: scale(1.06);
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(102, 255, 208, 0.8);
   }
 
-  p.footer {
+  footer {
     margin-top: 2rem;
-    opacity: 0.7;
-    text-align: center;
+    opacity: 0.9;
+    padding-bottom: 1rem;
+  }
+
+  #clock {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: #9dffe6;
+    text-shadow: 0 0 8px rgba(157, 255, 230, 0.7);
   }
 </style>
 </head>
 <body>
 
+<audio id="welcomeAudio" src="welcome.mp3" preload="auto"></audio>
+
 <h1>My Socials</h1>
-<div id="clock"></div>
 
 <div class="links">
   <a href="https://wa.link/ud1era" class="link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -117,39 +87,30 @@
   <a href="https://locket.cam/cytra_k9" class="link"><i class="fas fa-lock"></i> Locket</a>
 </div>
 
-<p class="footer">@cytra 2025</p>
+<footer>
+  <p>@cytra 2025</p>
+  <div id="clock"></div>
+</footer>
 
 <script>
-  // Real-time clock
   setInterval(() => {
     let now = new Date();
     document.getElementById('clock').innerText =
       now.toLocaleDateString() + " — " + now.toLocaleTimeString();
   }, 1000);
 
-  // Bounce the header
-  const header = document.querySelector('h1');
-  let posX = 20, posY = 20;
-  let speedX = 2, speedY = 2;
-
-  function bounce() {
-    const rect = header.getBoundingClientRect();
-    const screenW = window.innerWidth;
-    const screenH = window.innerHeight;
-
-    posX += speedX;
-    posY += speedY;
-
-    if (posX + rect.width >= screenW || posX <= 0) speedX *= -1;
-    if (posY + rect.height >= screenH || posY <= 0) speedY *= -1;
-
-    header.style.left = posX + 'px';
-    header.style.top = posY + 'px';
-
-    requestAnimationFrame(bounce);
-  }
-
-  bounce();
+  document.addEventListener('DOMContentLoaded', () => {
+    const welcome = document.getElementById('welcomeAudio');
+    setTimeout(() => {
+      welcome.play().catch(() => {
+        document.body.addEventListener(
+          'click',
+          () => welcome.play({ once: true }),
+          { once: true }
+        );
+      });
+    }, 500);
+  });
 </script>
 
 </body>

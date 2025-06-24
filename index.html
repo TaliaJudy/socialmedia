@@ -3,35 +3,36 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cytra_K9 — Cosmic Hub ✨</title>
+<title>Cytra_K9 — Cosmic Hub</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin:0; padding:0; background:#000; color:#fff; font-family:Orbitron,sans-serif;
-    overflow-x:hidden; scroll-behavior:smooth;
-  }
+  body {margin:0; padding:0; background:#000; color:#fff; font-family:Orbitron,sans-serif; overflow-x:hidden; scroll-behavior:smooth; }
   header {
-    position:fixed; top:0; left:0; width:100%; padding:0.5rem 2rem; z-index:100;
-    background:rgba(0,0,0,0.7); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:space-between;
-    border-bottom:1px solid rgba(0,255,255,0.3);
+    position:fixed; top:0; left:0; width:100%; padding:0.8rem 2rem; z-index:1000;
+    background:rgba(0,0,0,0.5); backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,255,255,0.3); 
+    display:flex; justify-content:space-between; align-items:center;
   }
-  header h1 { font-size:1.5rem; color:#0ff; animation:neon 2s infinite alternate; margin:0; }
-  @keyframes neon { 0% {text-shadow:0 0 10px #0ff;}100%{text-shadow:0 0 20px #ff0ff0;} }
-  main { padding-top:5rem; display:flex; flex-direction:column; align-items:center; gap:2rem; }
+  header h1 {font-size:1.8rem; color:#0ff; text-shadow:0 0 12px #0ff,0 0 24px #ff0ff0; animation:hue 10s infinite linear; margin:0;}
+  @keyframes hue {0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}
+  main { padding-top:6rem; display:flex; flex-direction:column; align-items:center; gap:3rem; padding-bottom:4rem; }
   .card {
-    width:90%; max-width:420px; padding:1.5rem; border-radius:1rem; border:1px solid #0ff; background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); box-shadow:0 0 24px #0ff;
-    opacity:0; transform:translateY(40px); transition:opacity 1s ease, transform 1s ease;
+    width:90%; max-width:420px; padding:2rem; border-radius:1rem; background:rgba(0,0,0,0.3); backdrop-filter:blur(12px); border:1px solid rgba(0,255,255,0.4); box-shadow:0 0 24px rgba(0,255,255,0.4); opacity:0; transform:translateY(50px); transition:opacity 1s ease, transform 1s ease;
   }
   .card.visible { opacity:1; transform:translateY(0); }
-  h2 { text-align:center; color:#0ff; }
-  .profile-pic { width:120px; height:120px; border-radius:50%; border:4px solid #0ff; box-shadow:0 0 24px #0ff; }
-  .links { display:flex; flex-direction:column; gap:1rem; align-items:center; }
-  .link { padding:1rem; width:80%; border:1px solid #0ff; border-radius:1rem; color:#fff; text-decoration:none; background:rgba(0,255,255,0.1); text-align:center; transition:all 0.3s; }
-  .link:hover { background:#0ff; color:#000; box-shadow:0 0 24px #0ff; transform:scale(1.05); }
-  #clock { font-size:1.1rem; color:#0ff; text-shadow:0 0 8px #0ff; }
-  canvas#bg { position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.2; z-index:0; }
-  /* Fade-in on scroll */
+  h2 { color:#0ff; text-align:center; margin-top:0; text-shadow:0 0 12px #0ff; }
+  .profile {display:flex; flex-direction:column; align-items:center; gap:1rem;}
+  .avatar-ring {width:160px; height:160px; border-radius:50%; border:3px solid #0ff; padding:4px; box-shadow:0 0 24px #0ff; animation:pulse 2s infinite alternate;}
+  @keyframes pulse {from{box-shadow:0 0 24px #0ff;} to{box-shadow:0 0 48px #ff0ff0;}}
+  .avatar-ring img {width:100%; height:100%; border-radius:50%; animation:spinY 8s linear infinite; object-fit:cover;}
+  @keyframes spinY {from{transform:rotateY(0deg);}to{transform:rotateY(360deg);}}
+  .links { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+  .link {
+    padding:1rem; width:80%; border-radius:1rem; border:1px solid #0ff; background:rgba(0,255,255,0.08); color:#fff; text-decoration:none; text-align:center; transition: all 0.3s;
+  }
+  .link i {margin-right:0.5rem;} .link:hover { background:#0ff; color:#000; box-shadow:0 0 24px #0ff; transform:scale(1.07);}
+  #clock {font-size:1.1rem; color:#0ff; text-shadow:0 0 8px #0ff;}
+  canvas#bg {position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.25; z-index:0;}
 </style>
 </head>
 <body>
@@ -43,8 +44,8 @@
 <canvas id="bg"></canvas>
 
 <main>
-  <div class="card" id="profile-card" style="text-align:center;">
-    <img class="profile-pic" src="https://via.placeholder.com/120" alt="Profile">
+  <div class="card profile" id="profile-card">
+    <div class="avatar-ring"><img src="https://via.placeholder.com/160" alt="Your Avatar"></div>
     <h2>Cytra_K9</h2>
     <p>Tech Creator & Cosmic Coder ✨</p>
   </div>
@@ -68,15 +69,14 @@
 </main>
 
 <script>
+  // Reveal on scroll
+  const cards=document.querySelectorAll('.card'); window.addEventListener('scroll',()=>{ cards.forEach(card=>{ let rect=card.getBoundingClientRect(); if(rect.top<window.innerHeight-50)card.classList.add('visible'); });}); window.dispatchEvent(new Event('scroll'));
   // Time
   setInterval(() => {document.getElementById('clock').textContent=new Date().toLocaleString();},1000);
-
-  // Fade-in cards
-  const cards=document.querySelectorAll('.card');const onScroll=()=>{cards.forEach(card=>{let rect=card.getBoundingClientRect();if(rect.top<window.innerHeight-50)card.classList.add('visible');});};window.addEventListener('scroll',onScroll);onScroll();
-
-  // Cosmic particles background
-  const canvas=document.getElementById('bg');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;let stars=[];for(let i=0;i<200;i++){stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});}
-  function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,2*Math.PI);ctx.fillStyle='#0ff';ctx.fill();s.y+=0.1;if(s.y>canvas.height)s.y=0;});requestAnimationFrame(drawStars);}drawStars();
+  // Cosmic starfield
+  const canvas=document.getElementById('bg');const ctx=canvas.getContext('2d');canvas.width=innerWidth;canvas.height=innerHeight;
+  let stars=Array.from({length:200},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,speed:0.2+Math.random()*0.3}));
+  function drawStars(){ ctx.clearRect(0,0,canvas.width,canvas.height); stars.forEach(s=>{ ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI); ctx.fillStyle='#0ff'; ctx.fill(); s.y+=s.speed; if(s.y>canvas.height)s.y=0; }); requestAnimationFrame(drawStars); } drawStars();
   window.addEventListener('resize',()=>{canvas.width=innerWidth;canvas.height=innerHeight;});
 </script>
 

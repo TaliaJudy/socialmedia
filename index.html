@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Social Media Handles</title>
+<title>My Socials</title>
 <link rel="icon" href="https://files.catbox.moe/b4uivz.webp" type="image/x-icon" />
 
 <!-- Font Awesome -->
@@ -11,168 +11,145 @@
 
 <style>
   body {
-    background: url('https://images.unsplash.com/photo-1609983568348-8fca6feff991?auto=format&fit=crop&w=1280&q=80') no-repeat center center fixed;
-    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     color: #fff;
-    min-height: 100vh;
-    padding: 2rem 1rem;
-    text-align: center;
-    margin: 0;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff66b2, #33ffcc);
+    background-size: 400% 400%;
+    animation: colorCycle 8s ease infinite;
+    overflow-x: hidden;
   }
+
+  @keyframes colorCycle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   h1 {
-    text-shadow: 0 0 8px #000;
-    margin-bottom: 1rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
+
   #clock {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 5px #000;
+    margin-top: 100px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    text-align: center;
   }
-  .links-container {
+
+  .links {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
+    padding: 2rem 1rem;
   }
-  .link-card {
-    padding: 1.2rem;
-    text-align: center;
-    font-size: 1.3rem;
+
+  .link {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    padding: 0.8rem;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.5);
     color: #fff;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.6);
-    border: 2px solid transparent;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease, background 0.3s ease;
+    text-decoration: none;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
-    text-decoration: none;
-  }
-  .link-card:hover {
-    background: rgba(255,255,255,0.1);
-    transform: scale(1.05);
-  }
-  .whatsapp { border-color: #25D366; }
-  .instagram { border-color: #C13584; }
-  .tiktok { border-color: #000; }
-  .email { border-color: #FFA500; }
-  .twitch { border-color: #9146FF; }
-  .locket { border-color: #FF4500; }
-
-  /* Age gate */
-  #ageGate {
-    position: fixed; top:0; left:0; width:100vw; height:100vh;
-    background: rgba(0,0,0,0.98); color:#fff;
-    z-index:99999; display:flex; flex-direction: column; align-items: center; justify-content:center;
-    text-align:center; padding:2rem;
-  }
-  #ageGate h2 { margin-bottom:2rem; font-size:1.8rem; }
-  #ageGate button {
-    padding: 0.8rem 2rem; margin:0.5rem;
-    font-size:1.1rem; border:none; border-radius:8px; cursor:pointer;
-  }
-  #yesBtn { background:#28a745; color:#fff; }
-  #noBtn { background:#dc3545; color:#fff; }
-
-  /* Sparkle message */
-  .sparkle-message {
-    animation: glow 2s infinite alternate;
-    position: relative;
+    gap: 0.5rem;
     overflow: hidden;
+    transition: transform 0.3s ease;
   }
-  .sparkle-message::before {
-    content: "";
-    position: absolute; inset:0;
-    background:
-      radial-gradient(circle, #fff 10%, transparent 30%),
-      radial-gradient(circle, #ff0 10%, transparent 40%),
-      radial-gradient(circle, #0ff 10%, transparent 50%);
-    background-size: 50px 50px;
-    opacity: 0.2;
-    animation: sparkle 3s linear infinite;
+
+  .link::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    border-radius: 12px;
+    background: conic-gradient(
+      from 0deg,
+      red, orange, yellow, lime, cyan, blue, violet, red
+    );
+    animation: rotate 3s linear infinite;
+    z-index: -1;
   }
-  @keyframes glow {
-    0% { box-shadow: 0 0 10px #ff00cc; }
-    100% { box-shadow: 0 0 40px #ff00cc; }
+
+  @keyframes rotate {
+    to { transform: rotate(1turn); }
   }
-  @keyframes sparkle {
-    from { background-position: 0 0, 10px 10px, 20px 20px; }
-    to { background-position: 200px 200px, 200px 200px, 200px 200px; }
+
+  .link:hover {
+    transform: scale(1.06);
+    background: rgba(0,0,0,0.6);
+  }
+
+  p.footer {
+    margin-top: 2rem;
+    opacity: 0.7;
+    text-align: center;
   }
 </style>
 </head>
 <body>
 
-<!-- Age Gate -->
-<div id="ageGate">
-  <h2>Are you 16 years or older?</h2>
-  <button id="yesBtn">✅ Yes, I am</button>
-  <button id="noBtn">❌ No, I'm not</button>
-</div>
-
-<h1>My Social Media</h1>
+<h1>My Socials</h1>
 <div id="clock"></div>
 
-<div class="links-container">
-  <a href="https://wa.link/ud1era" class="link-card whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-  <a href="https://ig.me/m/cytra_k9" class="link-card instagram" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-  <a href="https://www.tiktok.com/@cytra_k9" class="link-card tiktok" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-  <a href="mailto:jackwaikwa1@gmail.com" class="link-card email"><i class="fas fa-envelope"></i> Email Me</a>
-  <a href="https://www.twitch.tv/cytra_k9" class="link-card twitch" target="_blank"><i class="fab fa-twitch"></i> Twitch</a>
-  <a href="https://locket.cam/cytra_k9" class="link-card locket" target="_blank"><i class="fas fa-lock"></i> Locket</a>
+<div class="links">
+  <a href="https://wa.link/ud1era" class="link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <a href="https://ig.me/m/cytra_k9" class="link"><i class="fab fa-instagram"></i> Instagram</a>
+  <a href="https://www.tiktok.com/@cytra_k9" class="link"><i class="fab fa-tiktok"></i> TikTok</a>
+  <a href="mailto:jackwaikwa1@gmail.com" class="link"><i class="fas fa-envelope"></i> Email</a>
+  <a href="https://www.twitch.tv/cytra_k9" class="link"><i class="fab fa-twitch"></i> Twitch</a>
+  <a href="https://locket.cam/cytra_k9" class="link"><i class="fas fa-lock"></i> Locket</a>
 </div>
 
-<p style="margin-top:2rem;">@cytra 2025</p>
-
-<!-- Audio -->
-<audio id="clickSound" src="https://freesounds.org/data/previews/13/13166_22173-lq.mp3" preload="auto"></audio>
-<audio id="toggleSound" src="https://freesounds.org/data/previews/63/63120_634166-lq.mp3" preload="auto"></audio>
+<p class="footer">@cytra 2025</p>
 
 <script>
-  // Age Gate behavior
-  document.getElementById('yesBtn').onclick = () => {
-    document.getElementById('ageGate').style.display = 'none';
-    document.getElementById('toggleSound').play();
-  };
-  document.getElementById('noBtn').onclick = () => window.location.href = 'https://www.google.com';
+  // Real-time clock
+  setInterval(() => {
+    let now = new Date();
+    document.getElementById('clock').innerText =
+      now.toLocaleDateString() + " — " + now.toLocaleTimeString();
+  }, 1000);
 
-  // Clock
-  function updateClock() {
-    const clockElement = document.getElementById('clock')
-    const now = new Date()
-    clockElement.innerText = now.toLocaleDateString() + " — " + now.toLocaleTimeString()
+  // Bounce the header
+  const header = document.querySelector('h1');
+  let posX = 20, posY = 20;
+  let speedX = 2, speedY = 2;
+
+  function bounce() {
+    const rect = header.getBoundingClientRect();
+    const screenW = window.innerWidth;
+    const screenH = window.innerHeight;
+
+    posX += speedX;
+    posY += speedY;
+
+    if (posX + rect.width >= screenW || posX <= 0) speedX *= -1;
+    if (posY + rect.height >= screenH || posY <= 0) speedY *= -1;
+
+    header.style.left = posX + 'px';
+    header.style.top = posY + 'px';
+
+    requestAnimationFrame(bounce);
   }
-  setInterval(updateClock, 1000); updateClock();
 
-  // Secret Message feature
-  let secretCode = '';
-  document.addEventListener('keydown', (e) => {
-    secretCode += e.key;
-    if (secretCode.endsWith('cytra2025')) {
-      showSecretMessage();
-      secretCode = '';
-    }
-    if (secretCode.length > 20) secretCode = secretCode.slice(-20);
-  });
-
-  function showSecretMessage() {
-    const msg = document.createElement('div');
-    msg.innerText = '✨ You discovered a secret! Keep shining! ✨';
-    msg.style.position='fixed'; msg.style.top='50%'; msg.style.left='50%';
-    msg.style.transform='translate(-50%,-50%)';
-    msg.style.padding='2rem'; msg.style.borderRadius='10px';
-    msg.style.color='#fff'; msg.style.fontSize='1.5rem';
-    msg.style.textAlign='center'; msg.style.zIndex='9999';
-    msg.style.background='rgba(0,0,0,0.9)';
-    msg.style.boxShadow='0 0 40px #ff00cc';
-    msg.classList.add('sparkle-message');
-    document.body.appendChild(msg);
-    setTimeout(() => msg.remove(), 5000);
-  }
+  bounce();
 </script>
 
 </body>
